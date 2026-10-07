@@ -41,6 +41,10 @@ def save_samples(model, vae, cfg, device, samples_dir, epoch, writer=None):
         ("RD_Radio5_000",          660, 6,   608, "Radio5"),
         ("RD_Radio27_000",         1,   13,  131, "Radio27"),
     ]
+    # Fixed HDTF clips; skipped when data.root does not contain them (e.g. configs/demo.yaml)
+    samples = [s for s in samples if (Path(cfg.data.root) / s[0]).exists()]
+    if not samples:
+        return
 
     center_rows = []
     seq_rows    = []

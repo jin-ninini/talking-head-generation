@@ -5,3 +5,5 @@ __pycache__/
 *.pth
 *.ckpt
 data/HDTF_processed/
+data/demo/
+models/demo/

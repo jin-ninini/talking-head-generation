@@ -1,0 +1,2 @@
+# Env for `preprocess.py video` only (MediaPipe legacy mp.solutions needs numpy < 2); ffmpeg via conda-forge
+mediapipe==0.10.21

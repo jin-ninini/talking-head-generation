@@ -1,0 +1,70 @@
+# Demo of the full pipeline on data/examples (expG3 settings, 1 epoch, tiny data). Not for real training.
+run_name: G3_demo
+
+data:
+  root: data/demo
+  samples_per_video: 10
+  splits_dir: data/demo_splits
+  ref_repeat: true
+
+model:
+  ref_scale: 0.5
+  alpha: 0.35
+  dim: 512
+  num_heads: 8
+  spatial_layers: 2
+  temporal_layers: 2
+  audio_len: 5
+  ffn_dim_ratio: 4
+  dropout: 0.1
+  ndf: 32
+
+loss:
+  lambda_latent: 0.25
+  lambda_same: 0.01
+  lambda_diff: 0.0
+  diff_margin: 0.9
+  lambda_silence: 0.01
+  lambda_delta_reg: 0.01      # 0.005 → 0.01
+  lambda_smooth: 0.005
+  lambda_mouth: 0.0          
+  lambda_sync: 0.4
+  sync_margin: 0.2
+  sync_temperature: 0.07
+  lambda_adv: 0.05            # 0.03 → 0.05
+  lambda_fm: 0.5              # 0.0 → 0.5
+  lambda_sync_fm: 0.03
+  lambda_our: 0.15
+  our_margin: 1.0
+  our_lambda_pos: 1.0
+  our_lambda_neg: 2.5
+
+syncnet:
+  ckpt_path: models/syncnet/latentsync_syncnet.pt
+
+our:
+  ckpt_path: models/syncnet/synclt_best.pth
+  in_frames: 16
+  emb_dim: 256
+  pooling: attn
+  lip_in_channels: 4
+
+train:
+  epochs: 1
+  extra_epochs: 30
+  lr: 3.0e-06
+  lr_d: 1.0e-05               # 5e-6 → 1e-5
+  # d_freq: 2                 # grad_accum_steps=4로 대체됨 (코드에서 미사용)
+  batch_size: 2
+  grad_accum_steps: 4
+  num_workers: 0
+  seed: 42
+
+vae:
+  model_name: stabilityai/sd-vae-ft-mse
+
+results:
+  root: models/demo
+
+sample:
+  save_every: 1
