@@ -124,6 +124,7 @@ pip install -r requirements.txt --extra-index-url https://download.pytorch.org/w
 
 - Training also needs `lipsyncscore` from [lip-sync-score](https://github.com/weonjungin/lip-sync-score); put its `src/` folder on `PYTHONPATH`
 - Generated videos get audio only when `ffmpeg` is on `PATH`; otherwise a silent mp4 is saved
+- `test.py --postprocess` imports `gfpgan`, which fails with torchvision ≥ 0.17 (`No module named 'torchvision.transforms.functional_tensor'`). Fix it in the installed `basicsr/data/degradations.py` by changing that import to `torchvision.transforms.functional`
 
 ### Data Preparation
 
