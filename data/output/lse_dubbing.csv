@@ -1,0 +1,5 @@
+video,path,lse_c,lse_d,tracks
+D5_expB_audio1_ref51,data/output/inference/D5/expB_audio1_ref51.mp4,3.328,10.983,3
+english,data/output/demo/english.mp4,4.996,9.793,1
+korean_kss,data/output/demo/korean_kss.mp4,3.309,9.760,1
+korean_personal,data/output/demo/korean_personal.mp4,2.795,10.067,1

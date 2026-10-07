@@ -13,3 +13,28 @@ librosa==0.11.0
 # test.py --postprocess only
 gfpgan==1.3.8
 # Not on PyPI: lipsyncscore (https://github.com/weonjungin/lip-sync-score), see README
+
+# ---- Env adlip-prep (preprocess.py video; MediaPipe legacy mp.solutions needs numpy < 2, ffmpeg via conda-forge)
+# Install: pip install -r <(sed -n 's/^#\[prep\] //p' requirements.txt)
+#[prep] mediapipe==0.10.21
+
+# ---- Env dub (dubbing.py: STT -> MT -> TTS, and eval_lse.py with syncnet_python)
+# Install torch first: pip install torch==2.7.1 torchaudio==2.7.1 torchvision==0.22.1 --index-url https://download.pytorch.org/whl/cu118
+# Then: pip install -r <(sed -n 's/^#\[dub\] //p' requirements.txt)
+# and: pip install --no-deps scenedetect==0.6.7.1 (its click<8.3 pin clashes with huggingface-hub; the Python API works with newer click)
+#[dub] transformers==5.19.0
+#[dub] sentencepiece==0.2.2
+#[dub] protobuf==7.36.2
+#[dub] librosa==0.11.0
+#[dub] matplotlib==3.10.9
+#[dub] scipy==1.15.3
+#[dub] soundfile==0.14.0
+#[dub] jamo==0.4.1
+#[dub] g2pK==0.9.4
+#[dub] python-mecab-ko==1.3.7
+#[dub] Unidecode==1.4.0
+#[dub] inflect==7.5.0
+#[dub] gdown==6.4.1
+#[dub] opencv-contrib-python==4.13.0.92
+#[dub] python_speech_features==0.6
+#[dub] tqdm
