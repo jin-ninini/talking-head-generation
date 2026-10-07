@@ -120,7 +120,7 @@ talking-head-generation/
 ├── data/
 │   ├── HDTF_processed/      # Preprocessed HDTF videos (not included)
 │   ├── splits/              # train / val / test video lists
-│   ├── examples/            # Demo inputs: 00001.mp4 (face video), eng_audio.wav (speech)
+│   ├── examples/            # Demo inputs: 00001.mp4 (face video), eng_audio.wav, kor_audio.wav (speech)
 │   ├── demo_splits/         # Split lists for configs/demo.yaml
 │   ├── demo/                # Demo preprocessing and outputs (git-ignored)
 │   └── output/
@@ -254,6 +254,23 @@ What the demo produced on one RTX A6000:
 | `train.py` | 1 epoch, train loss 1.78, in-training val 2.50; writes `best.pt` / `last.pt` |
 | `valid.py` (G3 `best.pt`) | latent L1 2.03 (on the training clip itself; not a benchmark) |
 | `test.py` | `simple_ref6.mp4`: 1488 frames (93 × 16), 59.52 s, video + audio |
+
+<br>
+
+### Demo: Korean Dubbing
+
+The same face speaking Korean. `data/examples/kor_audio.wav` is `examples/sample_output.wav` from the team repo [korean-tts-pipeline](https://github.com/weonjungin/korean-tts-pipeline): English speech → Wav2Vec2 STT → mBART-50 translation → FastSpeech2 + VocGAN fine-tuned on a team member's voice (22.05 kHz, 5.29 s). The TTS models are not rerun here; that repo does not ship the FastSpeech2 code or the fine-tuned weights. Run step 1 of the demo above first (for `data/demo/00001`).
+
+```bash
+python preprocess.py audio --src data/examples/kor_audio.wav --out data/demo/kor_audio
+python test.py --ref_dir data/demo/00001 --audio_dir1 data/demo/kor_audio --audio_dir2 data/demo/kor_audio \
+    --cfg configs/demo.yaml --ckpt models/G3_20260529_104341/best.pt --out data/demo/output_kor
+```
+
+| Step | Result |
+|---|---|
+| `preprocess.py audio` | `audio.wav` 16 kHz mono 5.29 s; features `[132, 384]`, mel `[80, 424]` |
+| `test.py` | `simple_ref6.mp4`: 128 frames (8 × 16), 5.12 s, video + audio (the last 4 frames are dropped) |
 
 <br>
 
