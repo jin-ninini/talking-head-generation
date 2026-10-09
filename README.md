@@ -40,7 +40,7 @@ Ref Lip (16 × 96×96)                 Audio features
 
 ## Results
 
-Loss ablation on the HDTF test videos, as reported by the team (`data/output/lse_results_ADLip2.csv`):
+Loss ablation on 42 HDTF test videos, as reported by the team on the poster (`data/output/poster.jpg`, Table 1):
 
 | Condition | LatentSync | SyncLT | LSE-C ↑ | LSE-D ↓ |
 |---|---|---|---|---|
@@ -69,7 +69,7 @@ Dubbing demo: the G3 checkpoint drives the face of `data/examples/00001.mp4` wit
 - Each frame shows the generated lips (left, upscaled) and the face with the lips pasted back (right); the GIFs are 5 s clips without sound, and the mp4 files have audio
 - Korean speech scores lower on LSE-C than the English original, while LSE-D stays close for the 60 s tracks
 - The face is a 160×160 source upscaled to 256×256 and the team-voice clip is 5 s long, so these are demo numbers, not a benchmark
-- On `data/output/inference/D5/expB_audio1_ref51.mp4` this LSE setup gives 3.328 / 10.983 against the team's 3.050 / 11.085; the team's track aggregation and syncnet_python version are not recorded, so the dubbing numbers are compared with each other only
+- On `data/output/inference/D5/expB_audio1_ref51.mp4` this LSE setup gives 3.328 / 10.983 against the team's 3.050 / 11.085 (`data/output/lse_results_ADLip2.csv`); other track aggregations, syncnet_python options, and LatentSync's evaluation script did not reproduce the team's numbers either, and the team's setup is not recorded, so the dubbing numbers are compared with each other only
 - Generated HDTF samples for each experiment are in `data/output/inference/{D3,D5,F1,G1,G3_test}/`
 
 <br>
