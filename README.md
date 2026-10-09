@@ -42,12 +42,12 @@ Ref Lip (16 × 96×96)                 Audio features
 
 Loss ablation on 42 HDTF test videos, as reported by the team on the poster (`data/output/poster.jpg`, Table 1):
 
-| Condition | LatentSync | SyncLT | LSE-C ↑ | LSE-D ↓ |
-|---|---|---|---|---|
-| L1 (no SyncNet) | ✗ | ✗ | 0.083 | 14.983 |
-| LatentSync only | ✓ | ✗ | 5.472 | 9.071 |
-| SyncLT only | ✗ | ✓ | 1.898 | 12.146 |
-| **LatentSync + SyncLT** | ✓ | ✓ | **5.966** | **8.583** |
+| Condition | Latent | LatentSync | SyncLT | LSE-C ↑ | LSE-D ↓ |
+|---|---|---|---|---|---|
+| L1 (no-syncnet) | O | X | X | 0.083 | 14.983 |
+| Latent sync only | O | O | X | 5.472 | 9.071 |
+| SyncLT only | O | X | O | 1.898 | 12.146 |
+| Latent sync + SyncLT | O | O | O | <u>5.966</u> | <u>8.583</u> |
 
 - LatentSync (face level) and SyncLT (lip level) give complementary signals; together they give the best LSE-C and LSE-D
 - Lip information alone (SyncLT only) is not enough to learn synchronization
